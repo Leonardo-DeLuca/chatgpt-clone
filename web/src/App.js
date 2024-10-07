@@ -48,12 +48,18 @@ function App() {
         </div>
         <div className='chat-input-holder'>
           <form onSubmit={handleSubmit}>
-            <input
+            <textarea
               className='chat-input-textarea'
               value={input}
-              onChange={e => setInput(e.target.value)
-
-              }
+              onChange={e => setInput(e.target.value)}
+              rows={1} // Para definir o número inicial de linhas
+              style={{ resize: 'none' }} // Para evitar redimensionamento
+              onKeyPress={e => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault(); // Impede o envio com Enter se Shift não estiver pressionado
+                  handleSubmit(e);
+                }
+              }}
             />
           </form>
         </div>
